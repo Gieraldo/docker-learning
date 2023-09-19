@@ -1,3 +1,16 @@
+Lab 2.2 : Docker Run - Part 1
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+student@pod-username-node01:~$ nusactl login
+After login, run the nusactl start do-002-2 command. This command runs the start script and pre-configures your lab environment.
+
+student@pod-username-node01:~$ nusactl start do-002-2
+Introduction
+Execute in node pod-[username]-node01
+
+running docker (practice 01)
+
 1. Search image redis from dockerhub & harbor
 
 # From DockerHub
@@ -94,3 +107,6 @@ docker container ls -a
 7. Display image docker.
 
 docker images
+Verification
+Can access with curl to nginx1 & nginx2 containers
+Container redis1 running
