@@ -1,0 +1,24 @@
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+nusactl login
+After login, run the nusactl start do-003-6 command. This command runs the start script and pre-configures your lab environment.
+
+nusactl start do-003-6
+Introduction
+Execute in pod-[username]-node01
+
+1. Run the container from the nginx image with the network host.
+
+docker run -itd --network host --name my_nginx registry.adinusa.id/btacademy/nginx
+
+
+2. Test browsing to localhost.
+
+curl http://localhost
+
+
+3. Verification IP Address and bound port 80.
+
+ip add
+sudo netstat -tulpn | grep :80
