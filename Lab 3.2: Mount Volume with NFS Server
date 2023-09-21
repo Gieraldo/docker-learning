@@ -1,0 +1,45 @@
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+student@pod-username-node01:~$ nusactl login
+After login, run the nusactl start do-003-2 command. This command runs the start script and pre-configures your lab environment.
+
+student@pod-username-node01:~$ nusactl start do-003-2
+Introduction
+Execute in pod-[username]-node01
+
+Note: If there is a [username], change it to your username. If there is [X] replace with ip address of 2nd octet.
+
+1. Create working directory
+
+sudo mkdir -p /data/nfs-storage01/
+
+
+2. Create the NFS Server with docker.
+
+docker run -itd --privileged --restart unless-stopped -e SHARED_DIRECTORY=/data -v /data/nfs-storage01:/data -p 2049:2049 registry.adinusa.id/btacademy/nfs-server-alpine:12
+
+
+Execute in pod-[username]-node02
+
+3. Install the necessary packages, mount the volume on the NFS client and then create a file to check out the volume.
+
+ssh 10.7.7.20
+sudo apt install nfs-client -y
+sudo mount -v -o vers=4,loud 10.7.7.10:/ /mnt
+atau
+sudo mount -v -t nfs4 10.7.7.10:/ /mnt
+df -h
+
+sudo touch /mnt/file1.txt
+sudo touch /mnt/file2.txt
+exit
+
+
+Execute in pod-[username]-node01
+
+4. Verification.
+
+ls /data/nfs-storage01/
+Verification
+Make sure that all files are in the directory mentioned and have been mounted to node1.
