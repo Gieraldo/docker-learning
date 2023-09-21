@@ -1,0 +1,30 @@
+Docker Registry
+An overview of Docker Registry
+In this section, we will be looking at Docker Registry. Docker Registry is an open-source application that you can run anywhere you please and store your Docker image in. We will look at the comparison between Docker Registry and Docker Hub, and how to choose between the two. By the end of the section, you will learn how to run your own Docker Registry and see whether it's a proper fit for you.
+
+
+source : thecustomizewindows.com
+
+Docker Registry, as stated earlier, is an open source application that you can utilize to store your Docker images on a platform of your choice. This allows you to keep them 100% private if you wish, or share them as needed.
+
+Docker Registry makes a lot of sense if you want to deploy your own registry without having to pay for all the private features of Docker Hub. Next, let's take a look at some comparisons between Docker Hub and Docker Registry to help you can make an educated decision as to which platform to choose to store your images.
+
+Docker Registry has the following features:
+
+Host and manage your own registry from which you can serve all the repositories as private, public, or a mix between the two
+Scale the registry as needed, based on how many images you host or how many pull requests you are serving out
+Everything is command-line based
+With Docker Hub, you will:
+
+Get a GUI-based interface that you can use to manage your images
+Have a location already set up in the cloud that is ready to handle public and/or private images
+Have the peace of mind of not having to manage a server that is hosting all your images
+Docker Hub
+Docker Hub is the world's easiest way to create, manage, and deliver your teams' container applications.
+
+Docker Hub repositories allow you share container images with your team, customers, or the Docker community at large.
+
+Docker images are pushed to Docker Hub through the docker push command. A single Docker Hub repository can hold many Docker images (stored as tags).
+
+
+
