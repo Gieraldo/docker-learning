@@ -1,0 +1,62 @@
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+student@pod-username-node01:~$ nusactl login
+After login, run the nusactl start do-003-5 command. This command runs the start script and pre-configures your lab environment.
+
+student@pod-username-node01:~$ nusactl start do-003-5
+Introduction
+Execute in pod-[username]-node01
+
+1. Display a list of networks on the current docker network.
+
+sudo docker network ls
+
+
+2. Run 2 alpine container running ash shell.
+
+docker run -dit --name alpine1 registry.adinusa.id/btacademy/alpine ash
+docker run -dit --name alpine2 registry.adinusa.id/btacademy/alpine ash
+docker container ls
+
+
+3. Create a new docker network and attach it to the alpine1 container.
+
+docker network create --driver bridge bridge1
+docker network connect bridge1 alpine1
+
+
+4. Check the IP address of the alpine2 container.
+
+docker inspect alpine2  | jq -r '.[].NetworkSettings.IPAddress'
+
+
+5. Access to alpine1 container.
+
+docker exec -it alpine1 sh
+
+
+6. Display the IP address of container alpine1.
+
+ip add
+
+
+7. Ping test to the internet on container alpine1 (Success).
+
+ping -c 3 8.8.8.8
+
+
+8. Ping test to IP Address of alpine2 container (Success).
+
+ping -c 3 172.17.X.X
+
+
+9. Ping test to name of alpine2 container (failed).
+
+ping -c 3 alpine2
+
+
+10. Exit from container alpine1 without closing the shell Press Ctrl+P, Ctrl+Q.
+
+Verification
+Make sure the bridge1 network has been created, is connected to the alpine1 container and can ping google
