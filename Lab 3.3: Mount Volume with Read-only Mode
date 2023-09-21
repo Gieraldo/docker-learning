@@ -1,0 +1,62 @@
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+student@pod-username-node01:~$ nusactl login
+After login, run the nusactl start do-003-3 command. This command runs the start script and pre-configures your lab environment.
+
+student@pod-username-node01:~$ nusactl start do-003-3
+Introduction
+Execute in pod-[username]-node01
+
+1. Create docker volume
+
+docker volume create my-vol
+
+
+2. Display list docker volume.
+
+docker volume ls
+
+
+3. Display docker volume details.
+
+docker volume inspect my-vol
+
+
+4. Running the container with volume read and write access.
+
+docker run -d --name=nginx-rwvol -v my-vol:/usr/share/nginx/html -p 4005:80 registry.adinusa.id/btacademy/nginx:latest
+
+
+5. Display the IP Address of the container.
+
+docker inspect nginx-rwvol | jq -r '.[].NetworkSettings.IPAddress'
+
+
+6. Test browsing to IP Address of the container.
+
+curl http://172.17.X.X
+
+
+7. Create index.html file and move it to the source volume directory.
+
+sudo echo "This is from my-vol source directory" > index.html
+sudo mv index.html /var/lib/docker/volumes/my-vol/_data
+
+
+8. Test browsing to IP Address of the container.
+
+curl http://172.17.X.X
+
+
+9. Running container with volume read-only access.
+
+docker run -d --name=nginx-rovol -v my-vol:/usr/share/nginx/html:ro registry.adinusa.id/btacademy/nginx:latest
+
+
+10. View the nginx-rovol container details and pay attention to the Mode in Mounts section.
+
+docker inspect nginx-rovol | jq '.[].Mounts'
+Verification
+make sure the docker volume is created and when curl outputs as specified in adinusa
+Make sure the nginxtest-rovol container runs with a read-only volume
