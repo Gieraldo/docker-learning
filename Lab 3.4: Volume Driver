@@ -1,0 +1,50 @@
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+student@pod-username-node01:~$ nusactl login
+After login, run the nusactl start do-003-4 command. This command runs the start script and pre-configures your lab environment.
+
+student@pod-username-node01:~$ nusactl start do-003-4
+Introduction
+Execute in pod-[username]-node02
+
+Note: If there is a [username], change it to your username. If there is [X] in the IP is the attendance number.
+
+1. Create directory /share and Create index.html.
+
+sudo mkdir /share
+sudo chmod 777 /share
+echo "Hello Adinusa!" > /share/index.html
+
+
+Execute in pod-[username]-node01
+
+2. Instal plugin sshfs and set plugin sshfs.
+
+docker plugin install --grant-all-permissions vieux/sshfs
+docker plugin ls
+docker plugin disable [PLUGIN ID]
+docker plugin set vieux/sshfs sshkey.source=/home/student/.ssh/
+docker plugin enable [PLUGIN ID]
+docker plugin ls
+Note: Make Sure node01 can ssh passwordless to User student In node02
+
+
+
+3. Creating docker volume with driver sshfs.
+
+docker volume create --driver vieux/sshfs -o sshcmd=student@10.7.7.20:/share  -o allow_other sshvolume
+
+
+4. Test running container with the volume.
+
+docker run -d --name=nginxtest-sshfs -p 8090:80 -v sshvolume:/usr/share/nginx/html registry.adinusa.id/btacademy/nginx:latest
+
+
+5. Test browsing.
+
+docker ps
+curl http://localhost:8090
+Verification
+Make sure the directory share has been created and index.html is already in the share folder
+Docker Volume has been created with sshfs driver
