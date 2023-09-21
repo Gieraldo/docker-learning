@@ -1,0 +1,30 @@
+
+Preparation
+Before you begin, run the nusactl login doops command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+student@pod-username-node01:~$ nusactl login doops
+After login, run the nusactl start do-003-1 command. This command runs the start script and pre-configures your lab environment.
+
+student@pod-username-node01:~$ nusactl start do-003-1
+Introduction
+Execute in pod-[username]-node01
+
+1. Create working directory.
+
+cd $HOME
+mkdir -p latihan/latihan01-volume
+cd latihan/latihan01-volume
+
+
+2. Create file and container for data volume with name my-volume.
+
+for i in {1..10};do touch file-$i;done
+sudo docker create -v /my-volume --name my-volume registry.adinusa.id/btacademy/busybox
+sudo docker cp . my-volume:/my-volume 
+
+
+3. Mount the volume into the container.
+
+docker run --volumes-from my-volume registry.adinusa.id/btacademy/ubuntu ls /my-volume
+Verification
+The my-volume container is created, mounted and contains the previously created files
