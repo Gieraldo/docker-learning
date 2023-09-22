@@ -1,0 +1,41 @@
+Public Registry & Private Registry
+About Public Registry
+Registry is a repository or centralized image storage, approximately images that have been created by people or maybe you participate in creating images, then the Registry is the right place to store your image. One of the functions of the registry that can be understood is a centralized image, in the Registery there will be a lot of images such as the hub.docker.com site, there will be many images of famous stacks such as php, mysql, nginx, python, golang, etc.
+
+Docker Registry
+A Docker registry is a storage and distribution system for named Docker images. The same image might have multiple different versions, identified by their tags.
+
+A Docker registry is organized into Docker repositories, where a repository holds all the versions of a specific image. The registry allows Docker users to pull images locally, as well as push new images to the registry (given adequate access permissions when applicable).
+
+By default, the Docker engine interacts with DockerHub, Docker’s public registry instance. However, it is possible to run on-premise the open-source Docker registry/distribution, as well as a commercially supported version called Docker Trusted Registry. There are other public registries available online.
+
+What is Download rate limit on Docker Hub
+
+Docker Hub limits the number of Docker image downloads (“pulls”) based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For authenticated users, it is 200 pulls per 6 hour period. Users with a paid Docker subscription get up to 5000 pulls per day. If you require a higher number of pulls, you can also purchase an Enhanced Service Account add-on.
+
+Definition of limits
+
+A user’s limit is equal to the highest entitlement of their personal account or any organization they belong to. To take advantage of this, you must log in to Docker Hub as an authenticated user. For more information, see How do I authenticate pull requests. Unauthenticated (anonymous) users will have the limits enforced via IP.
+
+A pull request is defined as up to two GET requests on registry manifest URLs (/v2//manifests/).
+A normal image pull makes a single manifest request.
+A pull request for a multi-arch image makes two manifest requests.
+HEAD requests are not counted.
+About Private Registry
+A Docker private registry is a repository for storing and managing private Docker images. A private registry can be either hosted by a third-party service provider or self-hosted. Private registries provide a convenient way to share images within an organization or with a limited group of people.
+
+A private registry is a great way to keep your images safe and secure. By using a private registry, you can control who has access to your images and ensure that only authorized users can access them. This can be especially important if you are working with sensitive data or images that you do not want to be publicly available.
+
+Harbor
+Harbor is an open source registry that secures artifacts with policies and role-based access control, ensures images are scanned and free from vulnerabilities, and signs images as trusted. Harbor, a CNCF Graduated project, delivers compliance, performance, and interoperability to help you consistently and securely manage artifacts across cloud native compute platforms like Kubernetes and Docker.
+
+
+
+Features of Harbor Registry
+
+Multi-tenant support
+Security and vulnerability analysis support
+Extensible API and web UI
+Content signing and validation
+Image replication across multiple Harbor instances
+Identity integration and role-based access control

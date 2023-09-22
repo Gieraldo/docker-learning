@@ -1,0 +1,82 @@
+Lab 4.1: Exploring Dockerfile
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+nusactl login
+After login, run the nusactl start do-004-1 command. This command runs the start script and pre-configures your lab environment.
+
+nusactl start do-004-1
+Introduction
+Execute in pod-[username]-node01
+
+Dockerfile (practice 01)
+
+1. Clone repository for training.
+
+git clone https://github.com/spkane/docker-node-hello.git \
+    --config core.autocrlf=input latihan01
+
+
+2. Enter the directory.
+
+cd latihan01
+
+
+3. Create an image of the previous repository and name it node-exercise01.
+
+docker build -t node-latihan01 .
+
+
+4. Run the container with the previously created image and expose the port to 8080.
+
+docker run -d --rm --name node-latihan01 -p 8080:8080 node-latihan01
+
+
+5. Try access container.
+
+curl localhost:8080
+Dockerfile (practice 02)
+
+1. Create latihan02 directory.
+
+cd $HOME
+mkdir latihan02
+cd latihan02
+
+
+2. Create Dockerfile as below.
+
+vim Dockerfile
+...
+# Use whalesay image as a base image
+FROM registry.adinusa.id/btacademy/whalesay:latest
+
+# Install fortunes
+RUN apt -y update && apt install -y fortunes
+
+# Execute command
+CMD /usr/games/fortune -a | cowsay
+...
+
+
+3. Create image From Dockerfile.
+
+docker build -t docker-whale .
+
+
+4. Display the image that has been created.
+
+docker image ls
+
+
+5. Test run the image.
+
+docker run docker-whale
+
+
+6. Display the container.
+
+docker ps
+docker container ls -a
+Verification
+Make sure the node-latihan01 image & docker-whale image has been created and successfully run

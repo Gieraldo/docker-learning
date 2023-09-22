@@ -1,0 +1,104 @@
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+nusactl login
+After login, run the nusactl start do-004-2 command. This command runs the start script and pre-configures your lab environment.
+
+nusactl start do-004-2
+Introduction
+Execute in pod-[username]-node01
+
+Dockerfile (practice 03)
+
+1. If you don't have a Docker ID, register at https://hub.docker.com/signup.
+
+
+
+2. Login with Docker ID
+
+docker login
+
+
+3. Create directory latihan03.
+
+cd $HOME
+mkdir latihan03
+cd latihan03
+
+
+4. Create file flask.
+
+vim app.py
+...
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hey, we have Flask in a Docker container!'
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
+...
+
+
+5. Create file requirements.txt.
+
+vi requirements.txt
+...
+Flask==0.10.1
+Werkzeug==1.0.0
+Jinja2==2.8.1
+MarkupSafe==1.1.1
+itsdangerous==1.1.0
+...
+
+
+6. Creating Dockerfile.
+
+vim Dockerfile
+...
+FROM registry.adinusa.id/btacademy/ubuntu:16.04
+RUN mkdir /app
+RUN apt-get update -y && \
+        apt-get install python-pip python-dev -y
+
+COPY ./requirements.txt /app
+COPY . /app
+
+WORKDIR /app
+RUN pip install -r requirements.txt
+
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+...
+
+
+7. Create image from Dockerfile.
+
+docker build -t flask-latihan03 .
+
+
+8. Tag image with docker username.
+
+docker tag flask-latihan03 [usernamedocker]/flask-latihan03:latest
+
+
+9. Push image to dockerhub.
+
+docker push [usernamedocker]/flask-latihan03:latest
+
+
+10. Running the image .
+
+docker run -d -p 5000:5000 --name flask03 [usernamedocker]/flask-latihan03
+
+
+11. Test browsing.
+
+curl localhost:5000
+Verification
+Make sure everything is made in the requested folder
+Make sure the images have been tagged by inputting the docker username
+Make sure the container is up and outputting like app.py

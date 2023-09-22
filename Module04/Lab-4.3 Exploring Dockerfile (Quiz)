@@ -1,0 +1,39 @@
+Lab 4.3: Exploring Dockerfile (Quiz)
+Preparation
+Before you begin, run the nusactl login command to login your account. Credentials for login is same with your registered credentials in this platform (ADINUSA).
+
+nusactl login
+After login, run the nusactl start do-004-3 command. This command runs the start script and pre-configures your lab environment.
+
+nusactl start do-004-3
+
+
+Quiz
+Execute in pod-[username]-node01
+
+1. Create directory latihan-quiz01. Then, enter the directory.
+
+2. Clone repository from https://github.com/rivawahyuda/mywebsite.git
+
+3. Create Dockerfile inside directory latihan-quiz01 with the conditions:
+
+using image: registry.adinusa.id/btacademy/nginx:latest
+4. Create image with name latihan-quiz01-image.
+
+5. Run container with image latihan-quiz01-image, expose port 80, and named quiz01.
+
+6. Test browsing, make sure the display is not the nginx default web.
+
+Answer : 
+1. mkdir latihan-quiz-01
+2. cd latihan-quiz01
+3. git clone https://github.com/rivawahyuda/mywebsite.git
+4. vim Dockerfile :
+        # Get Image Registry
+        FROM registry.adinusa.id/btacademy/nginx:latest
+        # Copy file html to nginx docker
+        COPY . /usr/share/nginx/html/
+5. build docker images from Dockerfile: docker build -t latihan-quiz01-image .
+6. run docker images using port 80 and name quiz01: docker run -d -p 80:80 --name quiz01 latihan-quiz01-image
+7. test curl : localhost:80
+8. done
